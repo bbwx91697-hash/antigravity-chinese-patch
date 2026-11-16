@@ -107,6 +107,8 @@ function buildDistZip(baseDir = __dirname) {
     'SKILL.md',
     'README.md',
     'install.mjs',
+    'install.bat',
+    'install.sh',
     '.gitattributes',
     '.gitignore',
     'core',

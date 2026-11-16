@@ -1,22 +1,64 @@
-# 船板的 Antigravity 书卷暖纸 × 官方碳黑昼夜双模式主题、字体优化与深度汉化全栈补丁 (v5.1.4 · 完整适配 Antigravity 2.31.0)
+# Antigravity 主题美化与深度汉化增强补丁 (v5.1.4+ · 完整适配 Antigravity 2.31.0)
 
-[![Version](https://img.shields.io/badge/version-5.1.4-7A1F1A.svg)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch)
-[![Antigravity](https://img.shields.io/badge/Antigravity-2.31.0%2B-D97757.svg)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch)
+[![Version](https://img.shields.io/badge/version-5.1.4%2B-7A1F1A.svg)](https://github.com/bbwx91697-hash/antigravity-chinese-patch)
+[![Antigravity](https://img.shields.io/badge/Antigravity-2.31.0%2B-D97757.svg)](https://github.com/bbwx91697-hash/antigravity-chinese-patch)
 [![Node](https://img.shields.io/badge/node-%3E%3D22.0.0%20(22.13%2B%20Full)-339933.svg)](https://nodejs.org/)
-[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)](https://github.com/Anarcadia/chuanban-antigravity-theme-patch)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)](https://github.com/bbwx91697-hash/antigravity-chinese-patch)
 
-> **本页面为补丁主介绍、极简部署指南与版本演进说明。**  
-> 供 AI Agent 执行一键安装与二次改装读取的完整技术契约独立存放于仓库根目录的 **[`SKILL.md`](https://github.com/Anarcadia/chuanban-antigravity-theme-patch/blob/main/SKILL.md)**。
+> **本项目基于船板原作 [`Anarcadia/chuanban-antigravity-theme-patch`](https://github.com/Anarcadia/chuanban-antigravity-theme-patch)（v5.1.4）二开优化。**  
+> 在完整保留原版 `core/` 暖纸/官方碳黑昼夜主题、四层字体与实时指标胶囊的基础上，通过 `user/` 无损改装层**补全了新版客户端多处遗漏汉化**，并新增 **Windows/macOS/Linux 一键安装脚本** 与 **GitHub 字体备用方案**。  
+> 供 AI Agent 自动部署与二次改装读取的完整技术契约位于仓库根目录 **[`SKILL.md`](SKILL.md)**。
 
 ---
 
-## 🔗 核心资源链接与三端入口
+## ⚡ 30 秒极速安装（三选一，新手推荐方式 1 或 2）
 
-| 端点名称 | 链接地址 | 定位与包含内容 |
+### 方式 1：复制给你的 AI Agent 一键全自动部署（最省心）
+直接把下面这段话发给 Antigravity / Claude Code / Cursor / Codex，它会自动完成**检查环境 → 下载并注册字体 → 安装守护服务 → 实机验证**：
+
+> **💬 复制发给 Agent（一键安装）**：  
+> 请帮我克隆 `https://github.com/bbwx91697-hash/antigravity-chinese-patch.git`（或读取我已下载解压的补丁目录），严格按照仓库内的 `SKILL.md` 依次执行 `node install.mjs doctor`（若未安装字体则先下载并安装，Google Drive 限流时自动改用 `SKILL.md` 中的 GitHub 字体备用源，Windows 用 `node install.mjs install-fonts` 注册）、`node install.mjs install` 和 `node install.mjs verify`，帮我一键部署好并验证实机生效。
+
+### 方式 2：双击一键安装脚本（不用敲命令）
+前提：已安装 **Node.js `>= 22.0.0`**（推荐 `>= 22.13.0` 以解锁底部实时指标胶囊）。
+1. 点击右上角 `Code` → `Download ZIP` 并解压（或 `git clone https://github.com/bbwx91697-hash/antigravity-chinese-patch.git`）。
+2. **Windows 用户**直接双击运行根目录的 **[`install.bat`](install.bat)**；**macOS / Linux 用户**在终端运行 `bash install.sh`。
+3. 脚本会自动检查环境、安装补丁、注册开机守护进程并校验注入结果。若字体尚未安装，可把字体放到同目录的 `fonts/` 文件夹下再运行一次脚本即可自动注册。
+
+### 方式 3：命令行 2 步安装
+```bash
+git clone https://github.com/bbwx91697-hash/antigravity-chinese-patch.git
+cd antigravity-chinese-patch
+# （可选）若已下载字体到 ./fonts，Windows/macOS/Linux 通用：
+node install.mjs install-fonts --from ./fonts
+# 一键安装并实机验证：
+node install.mjs install && node install.mjs verify
+```
+
+> **💡 首次开启提示**：第一次运行 `install` 会自动往 `~/.antigravity/argv.json` 写入调试端口 `9222`。如果安装前 Antigravity 已经打开且 `verify` 未连上，**完全退出并重新打开一次 Antigravity** 即可自动生效。
+
+---
+
+## 🆕 本增强版新增汉化与优化清单（基于船板 v5.1.4）
+
+在原版 900 条核心词典之上，已在 `user/i18n.override.json`（73 条静态覆盖）与 `user/custom.js` 中补全以下高频遗漏界面：
+1. **首页动态欢迎语全覆盖**：支持 Antigravity 3 组随机轮换问候语（含「带用户名 / 无用户名」全部 6 种形态：`Hey ... what should we build today?`、`Welcome back ... Where should we pick up?`、`Good to see you ... What's next?`）。
+2. **左侧边栏对话列表时间标签**：将紧凑相对时间 `now` / `m` / `h` / `d` / `w` / `mo` / `y` 汉化为 `刚刚` / `X分钟前` / `X小时前` / `X天前` / `X周前` / `X个月前` / `X年前`（精准限定于时间标签节点，不误伤正文与代码）。
+3. **悬停卡片与会话菜单补全**：补全 `Outside of Project`（未关联项目）、`Archive Conversation`（归档会话）、`Share`（分享）、`Coordinators`（协调者）、`No coordinators`（暂无协调者）、`Open Conversation`（打开会话）、`Rename Conversation`（重命名会话）等。
+4. **新版权限审批卡片（`ask_permission`）全量汉化**：覆盖读写路径、命令执行、沙箱外运行、网址与下载、MCP 工具、UAC 提权等 21 种询问/保存规则标题；静态与带域名/规则名变量的 `Yes, allow ...` 选项；第 4 行限定作用域的 `No` → `否` 与输入框提示 `（告诉智能体改做什么）`；`Skip` → `跳过`、`Waiting for user input` → `等待用户输入`、`Exited with code N` → `退出码 N` 等。
+5. **开箱体验与稳定性优化**：移除 `user/i18n.override.json` UTF-8 BOM 以确保覆盖词典稳定生效；新增 [`install.bat`](install.bat) / [`install.sh`](install.sh) 一键安装脚本；在 `SKILL.md` 中补充 Google Drive 限流时的 GitHub 开源字体备用获取路径。
+
+---
+
+## 🔗 核心资源链接与字体下载
+
+| 资源名称 | 链接地址 | 说明 |
 | :--- | :--- | :--- |
-| **1. Google Drive 全套资源包（含字体）** | [**Google Drive 官方共享文件夹**](https://drive.google.com/drive/folders/1NX92SgVUqtSjWg6bt6sIJXy-cn7J_boC) | **全项目成品包 + 全套必备字体库**。内置 **Anthropic 官方原版字体族**（`Anthropic Sans` / `Anthropic Serif` / `Anthropic Mono`）与 **更纱黑体超集**（`Sarasa-SuperTTC.ttc`）。 |
-| **2. GitHub 项目代码库** | [**Anarcadia/chuanban-antigravity-theme-patch**](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) | **成品补丁代码完全体**。包含预封装只读内核 `core/`、个人改装层 `user/`、一键安装器 `install.mjs` 及 Agent 专用的 [`SKILL.md`](https://github.com/Anarcadia/chuanban-antigravity-theme-patch/blob/main/SKILL.md)（字体请从上方 Google Drive 下载）。 |
-| **3. Notion 引导安装页** | [**chuanban-antigravity-theme-patch**](https://chuanban.notion.site/chuanban-antigravity-theme-patch-db7c5846f37546be9481cd791aed0554) | 备用说明与部署引导主页。 |
+| **1. 本仓库（增强整合版）** | [**bbwx91697-hash/antigravity-chinese-patch**](https://github.com/bbwx91697-hash/antigravity-chinese-patch) | 包含完整 `core/` + 增强版 `user/` + 一键脚本 [`install.bat`](install.bat) / [`install.sh`](install.sh) + [`SKILL.md`](SKILL.md)。 |
+| **2. 原作权威仓库（船板）** | [**Anarcadia/chuanban-antigravity-theme-patch**](https://github.com/Anarcadia/chuanban-antigravity-theme-patch) | 主题内核 `core/`、CLI 与原版设计均源自船板大佬。 |
+| **3. Google Drive 完整资源包（含字体）** | [**Google Drive 官方共享文件夹**](https://drive.google.com/drive/folders/1NX92SgVUqtSjWg6bt6sIJXy-cn7J_boC) | 内置 **Anthropic 官方字体族**（`Anthropic Sans` / `Anthropic Serif` / `Anthropic Mono`）与 **更纱黑体超集**（`Sarasa-SuperTTC.ttc`）。 |
+| **4. 字体备用源（Google Drive 限流时）** | [**anthropic-fonts**](https://github.com/matthieuhuguet/anthropic-fonts) & [**Sarasa-Gothic Releases**](https://github.com/be5invis/Sarasa-Gothic/releases) | 若 Google Drive 提示 `Quota exceeded`，可从这两个 GitHub 开源仓库获取对应字体文件。 |
+| **5. Notion 原版引导页** | [**chuanban-antigravity-theme-patch**](https://chuanban.notion.site/chuanban-antigravity-theme-patch-db7c5846f37546be9481cd791aed0554) | 原作者说明与部署引导主页。 |
 
 ---
 
@@ -51,22 +93,15 @@ Google Antigravity 原生浅色界面偏冷刺眼、全局仅使用单一无衬�
 
 ---
 
-## 🚀 极简部署与日常使用指南
+## 🚀 升级、定制与排障指南
 
-### 一、新用户初次安装
-1. **前置准备**：从 [**Google Drive 全套资源包**](https://drive.google.com/drive/folders/1NX92SgVUqtSjWg6bt6sIJXy-cn7J_boC) 下载并安装字体文件（macOS 双击安装到「字体册」，Windows 可让 Agent 用内置命令一键注册），并确保本机已安装 **Node.js `>= 22.0.0`**（推荐 `>= 22.13.0` 以解锁实时指标胶囊）。
-2. **复制发给你的 AI Agent（Antigravity / Claude Code / Codex / Cursor 等）**：
+### 一、老版本用户无缝升级至本增强版
+`node install.mjs install` 会自动备份旧内核、接管旧版常驻服务，并无损保留你已有改装配置（如从原版升级且未改过 `user/`，可直接用本仓库的 `user/` 覆盖获取增强汉化）：
 
-> **💬 复制发给 Agent（新用户一键安装）**：  
-> 请帮我克隆 `https://github.com/Anarcadia/chuanban-antigravity-theme-patch.git`（或读取我已下载解压的补丁目录），严格按照仓库内的 `SKILL.md` 依次执行 `node install.mjs doctor`（Windows 下若未装字体请先用 `node install.mjs install-fonts` 注册字体）、`node install.mjs install` 和 `node install.mjs verify`，帮我一键部署好船板的 Antigravity 主题补丁并验证实机生效。
+> **💬 复制发给 Agent（无缝升级）**：  
+> 请帮我拉取最新的 `https://github.com/bbwx91697-hash/antigravity-chinese-patch.git`，阅读其中的 `SKILL.md`，运行 `node install.mjs install` 和 `node install.mjs verify` 完成升级；若我本地 `user/` 中此前做过自定义配置，请与新版 `user/custom.js`、`user/i18n.override.json` 合并保留。
 
-### 二、老版本用户无缝升级至 v5.1.4
-`node install.mjs install` 会自动备份旧内核、接管旧版常驻服务，并无损保留你在 `~/.gemini/antigravity/theme-patch/user/` 中的个人配置：
-
-> **💬 复制发给 Agent（老用户无缝升级）**：  
-> 请帮我拉取最新的 `https://github.com/Anarcadia/chuanban-antigravity-theme-patch.git`，阅读其中的 `SKILL.md`，直接运行 `node install.mjs install` 和 `node install.mjs verify` 将我的环境升级至最新 `v5.1.4` 版本（若我旧脚本里有自定义的配色预设或字号修改，请迁移保留到 `~/.gemini/antigravity/theme-patch/user/` 改装层中）。
-
-### 三、后续与 Agent 对话定制风格或排障
+### 二、后续与 Agent 对话定制风格或排障
 - **🎨 切换白天预设、调整字号或微调外观**：
   > 请参考 `~/.gemini/antigravity/theme-patch/SKILL.md` 的 `user/` 改装规范，只修改 `user/` 目录下的配置文件：帮我把白天配色预设切换为「ClaudeDesktop 净白」（或「复古深色」） / 把对话正文字号调为 `16.5px` / 在 `user/custom.css` 里微调某处样式。
 - **🇨🇳 自定义修改或新增某条汉化词条**：

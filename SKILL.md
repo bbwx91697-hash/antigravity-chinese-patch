@@ -21,9 +21,13 @@ description: 船板的 Antigravity 2.0 主题、字体与深度汉化全栈成�
 1. **Google Drive 完全资源包（全项目成品包 + 全套商业/开源字体库）**
    - 链接：<https://drive.google.com/drive/folders/1NX92SgVUqtSjWg6bt6sIJXy-cn7J_boC>
    - 包含：**v5.1.4 完整项目成品包 + 全套必备字体包（Anthropic 官方字体族 `Anthropic Sans` / `Anthropic Serif` / `Anthropic Mono` + 更纱黑体 `Sarasa-SuperTTC.ttc` 超集）**。
-2. **GitHub 权威代码库（成品补丁仓库与 `SKILL.md` 本体）**
-   - 仓库：<https://github.com/Anarcadia/chuanban-antigravity-theme-patch>
-   - 包含：全部 `core/` 黄金内核、`user/` 改装模板、`install.mjs` CLI 与本 `SKILL.md`（字体文件请从上方 Google Drive 链接下载）。
+   - **GitHub 字体备用源（当 Google Drive 触发 `Quota exceeded` 限流时自动改用）**：
+     - Anthropic 字体族（`AnthropicMono-Regular.ttf`、`AnthropicSans-Regular.ttf`、`AnthropicSans-Bold.ttf`、`AnthropicSerif-Regular.ttf`、`AnthropicSerif-Bold.ttf`）：<https://github.com/matthieuhuguet/anthropic-fonts>（`ttf/` 目录）
+     - 更纱黑体超集（`Sarasa-SuperTTC.ttc`）：<https://github.com/be5invis/Sarasa-Gothic/releases>（下载最新 `Sarasa-SuperTTC-*.7z` 或 `.zip` 解压）
+2. **GitHub 权威代码库（本增强整合版 & 船板原版）**
+   - 本增强整合版：<https://github.com/bbwx91697-hash/antigravity-chinese-patch>（含 `user/` 首页问候/侧边栏时间/新版权限卡片全量汉化增强与 `install.bat` / `install.sh` 一键脚本）
+   - 原版上游仓库：<https://github.com/Anarcadia/chuanban-antigravity-theme-patch>
+   - 包含：全部 `core/` 黄金内核、`user/` 改装层、`install.mjs` CLI 与本 `SKILL.md`。
 3. **Notion 引导主页**
    - 链接：<https://chuanban.notion.site/chuanban-antigravity-theme-patch-db7c5846f37546be9481cd791aed0554>
 
@@ -77,7 +81,7 @@ chuanban-antigravity-theme-patch/
 ```bash
 node install.mjs doctor
 ```
-- **若缺少字体**：引导用户从 [Google Drive 完全资源包](https://drive.google.com/drive/folders/1NX92SgVUqtSjWg6bt6sIJXy-cn7J_boC) 下载字体包并安装（macOS: `~/Library/Fonts/`；Windows: 运行 `node install.mjs install-fonts --from <解压目录>`；Linux: `~/.local/share/fonts/`）。
+- **若缺少字体**：优先尝试从 [Google Drive 完全资源包](https://drive.google.com/drive/folders/1NX92SgVUqtSjWg6bt6sIJXy-cn7J_boC) 获取；**若遇到 `Quota exceeded` 限流**，直接改用上方第 1 节中的 GitHub 开源备用源下载 `Anthropic*.ttf` 与 `Sarasa-SuperTTC.ttc`（Windows 10/11 可直接用内置 `tar -xf` 解压 `.7z`），再运行 `node install.mjs install-fonts --from <字体目录>`（macOS 也可放入 `~/Library/Fonts/`，Linux 放入 `~/.local/share/fonts/`）。
 
 ### Step 2：一键安装并注册守护服务
 ```bash
